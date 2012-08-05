@@ -1,0 +1,47 @@
+# Example file format that is not used yet.
+# Could be nicer to edit than the .json
+
+Hard Times Cafe
+ 6am-4am
+
+Seward Cafe
+ 7am-3pm M-F
+ 8am-4pm Sa,Su
+
+Fireroast Cafe
+ 6:30am-9pm M-Th
+ 6:30am-9:30pm F
+ 8am-9:30pm Sa
+ 8am-5pm Su
+
+Seward Co-op
+ 8am-10pm
+
+Minneapolis Central Library
+ 10am-6pm M,W,F,Sa
+ 10am-8pm Tu,Th
+ 12pm-5pm Su
+
+Franklin Library
+ 12pm-8pm Tu,Th
+ 10am-6pm W,F,Sa
+
+UM Math Library
+ 2012-05-28, 2012-07-04, 2012-09-03
+  Closed
+ 2012-05-21 to 2012-09-02
+  8am-4:30pm M-F
+
+Wilson Library
+ 2012-05-28, 2012-07-04
+  Closed
+ 2012-09-03
+  12pm-6pm
+ 2012-05-21 to 2012-08-03
+  8am-9pm M-Th
+  8am-6pm F
+  11am-6pm Sa
+  12pm-6pm Su
+ 2012-08-04 to 2012-09-02
+  8am-6pm M-F
+  12pm-6pm Sa,Su

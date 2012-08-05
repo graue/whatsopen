@@ -1,0 +1,62 @@
+{
+  "_comment": "Times when potential hangout spots are open",
+  "places": {
+    "Hard Times Cafe":
+      [{"open": "6am", "close": "4am"}],
+
+    "Caffetto":
+      [{"open": "6am", "close": "1am"}],
+
+    "Seward Cafe":
+      [{"open": "7am", "close": "3pm", "days": ["M","Tu","W","Th","F"]},
+       {"open": "8am", "close": "4pm", "days": ["Sa","Su"]}],
+
+    "Fireroast Cafe":
+      [{"open": "6:30am", "close": "9pm",    "days": ["M","Tu","W","Th"]},
+       {"open": "6:30am", "close": "9:30pm", "days": ["F"]},
+       {"open": "8am",    "close": "9:30pm", "days": ["Sa"]},
+       {"open": "8am",    "close": "5pm",    "days": ["Su"]}],
+
+    "Kitty Cat Klub":
+      [{"open": "4pm", "close": "2am"}],
+
+    "Seward Co-op":
+      [{"open": "8am", "close": "10pm"}],
+
+    "Minneapolis Central Library":
+      [{"open": "10am", "close": "6pm", "days": ["M","W","F","Sa"]},
+       {"open": "10am", "close": "8pm", "days": ["Tu","Th"]},
+       {"open": "12pm", "close": "5pm", "days": ["Su"]}],
+
+    "Franklin Library":
+      [{"open": "12pm", "close": "8pm", "days": ["Tu","Th"]},
+       {"open": "10am", "close": "6pm", "days": ["W","F","Sa"]}],
+
+    "UM Math Library":
+      [{"from": "2012-05-28", "to": "2012-05-28"},
+       {"from": "2012-07-04", "to": "2012-07-04"},
+       {"from": "2012-09-03", "to": "2012-09-03"},
+       {"from": "2012-05-21", "to": "2012-09-02",
+        "days": ["M","Tu","W","Th","F"],
+        "open": "8am", "close": "4:30pm"}],
+
+    "Wilson Library":
+      [{"from": "2012-05-28", "to": "2012-05-28"},
+       {"from": "2012-07-04", "to": "2012-07-04"},
+       {"from": "2012-09-03", "to": "2012-09-03",
+        "open": "12pm", "close": "6pm"},
+       {"from": "2012-05-21", "to": "2012-08-03",
+        "days": ["M","Tu","W","Th"],
+        "open": "8am", "close": "9pm"},
+       {"from": "2012-05-21", "to": "2012-08-03",
+        "days": ["F"], "open": "8am", "close": "6pm"},
+       {"from": "2012-05-21", "to": "2012-08-03",
+        "days": ["Sa"], "open": "11am", "close": "6pm"},
+       {"from": "2012-05-21", "to": "2012-08-03",
+        "days": ["Su"], "open": "12pm", "close": "6pm"},
+       {"from": "2012-08-04", "to": "2012-09-02",
+        "days": ["M","Tu","W","Th","F"],
+        "open": "8am", "close": "6pm"},
+       {"from": "2012-08-04", "to": "2012-09-02",
+        "days": ["Sa","Su"], "open": "12pm", "close": "6pm"}]
+  }}
