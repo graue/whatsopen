@@ -7,6 +7,9 @@
     "Caffetto":
       [{"open": "6am", "close": "1am"}],
 
+    "Afro Deli":
+      [{"open": "9am", "close": "9pm", "days": ["M","Tu","W","Th","F","Sa"]}],
+
     "Seward Cafe":
       [{"open": "7am", "close": "3pm", "days": ["M","Tu","W","Th","F"]},
        {"open": "8am", "close": "4pm", "days": ["Sa","Su"]}],
