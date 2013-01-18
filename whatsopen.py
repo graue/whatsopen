@@ -1,9 +1,6 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-# TODO: Show time when an open place will close, or vice versa.
-# Also: parse hangouts.txt. Better than handwriting JSON.
-
 from datetime import datetime, time, timedelta
 import re
 try:
@@ -27,24 +24,32 @@ def strtotime(s):
     return time(hour + (12 if m.group(2) == 'p' else 0))
 
 
-def placeopen(hourspecs, dt):
-    d, t = dt.date(), dt.time()
+def find_todays_hours(current_datetime, hourspecs):
+    """ Returns a tuple of today's opening and closing times as time objects,
+         or None if there are no hours specified for today. """
+
+    # Save date and time separately for faster access.
+    current_date, current_time = (current_datetime.date(),
+                                  current_datetime.time())
+
+    # The weekday and previous weekday,
+    # using abbreviations that are used in the JSON.
     wdayabbrevs = ['M', 'Tu', 'W', 'Th', 'F', 'Sa', 'Su']
-    weekday = wdayabbrevs[dt.weekday()]
-    prevwday = wdayabbrevs[(dt.weekday() + 6) % 7]
+    weekday = wdayabbrevs[current_datetime.weekday()]
+    prevwday = wdayabbrevs[(current_datetime.weekday() + 6) % 7]
 
     for hourspec in hourspecs:
         try:
-            opentime, closetime = (strtotime(hourspec[x]) \
+            opentime, closetime = (strtotime(hourspec[x])
               for x in ('open', 'close'))
         except KeyError:
             opentime, closetime = None, None
 
         # Skip this hourspec if it doesn't match current time.
         # This is tricky because of time ranges that overlap midnight!
-        effd, effwday = d, weekday
+        effd, effwday = current_date, weekday
 
-        if opentime > closetime and t < closetime:
+        if opentime > closetime and current_time < closetime:
             # In this case, treat as if previous day.
             effwday = prevwday
             effd -= timedelta(1)
@@ -55,16 +60,29 @@ def placeopen(hourspecs, dt):
           or ('to' in hourspec and effd > strtodate(hourspec['to']))):
             continue
 
-        # Hourspec matches — compare with current time.
-        if t > opentime and t < closetime:
-            return True
-        elif opentime > closetime and (t > opentime or t < closetime):
-            return True
-        else:
-            return False
+        # Hourspec matches.
+        return opentime, closetime
 
-    # No hourspec matched, assume closed.
-    return False
+    # We fell through the loop, so no hourspec matched.
+    return None, None
+
+
+def placeopen(hourspecs, dt):
+    """ Given the date/time dt, is the place specified by hourspecs open? """
+    opentime, closetime = find_todays_hours(dt, hourspecs)
+
+    if opentime is None:
+        # No hours for today, so assume the place is closed.
+        return False
+
+    # Compare hours with current time.
+    t = dt.time()
+    if t > opentime and t < closetime:
+        return True
+    elif opentime > closetime and (t > opentime or t < closetime):
+        return True
+    else:
+        return False
 
 
 with open('hangouts.json') as fp:
