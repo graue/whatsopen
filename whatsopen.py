@@ -67,19 +67,12 @@ def find_todays_hours(current_datetime, hourspecs):
     return None, None
 
 
-def placeopen(hourspecs, dt):
-    """ Given the date/time dt, is the place specified by hourspecs open? """
-    opentime, closetime = find_todays_hours(dt, hourspecs)
-
-    if opentime is None:
-        # No hours for today, so assume the place is closed.
-        return False
-
-    # Compare hours with current time.
-    t = dt.time()
-    if t > opentime and t < closetime:
+def is_time_between(t, start_time, end_time):
+    """ Is the time t between start_time and end_time?
+        If start_time > end_time, the range is assumed to span midnight. """
+    if t > start_time and t < end_time:
         return True
-    elif opentime > closetime and (t > opentime or t < closetime):
+    elif start_time > end_time and (t > start_time or t < end_time):
         return True
     else:
         return False
@@ -89,6 +82,20 @@ with open('hangouts.json') as fp:
     places = json.load(fp)['places']
 
 for p in sorted(places.keys()):
-    status = 'open' if placeopen(places[p], datetime.today()) else 'closed'
-    if status == 'open':
-        print p
+    dt = datetime.today()
+    opentime, closetime = find_todays_hours(dt, places[p])
+
+    if opentime is not None:
+        # Place has hours for today; check them.
+        if is_time_between(dt.time(), opentime, closetime):
+            # Bingo! Place is open.
+            # Print place name.
+            print p,
+
+            # Space out to column 21.
+            print ''.join([' ' for x in range(0, 20 - len(p))]),
+
+            # Print closing time.
+            str_closetime = re.sub('^(0)', ' ',
+                                   closetime.strftime('%I:%M%P'))
+            print 'until {}'.format(str_closetime)
